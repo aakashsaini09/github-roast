@@ -12,12 +12,12 @@ export default function Home() {
     {
       id: 2,
       name: 'Twiter',
-      url: '/github'
+      url: '/twitter'
     },
     {
       id: 3,
       name: 'Linkedin',
-      url: '/github'
+      url: '/linkedin'
     },
   ]
   return (
@@ -25,7 +25,7 @@ export default function Home() {
       <div className="flex flex-wrap justify-center mt-10 pt-7 gap-4 md:gap-9">
         {socials.map((card) => {
           return (
-            <Card key={card.id} name={card.name}/>
+            <Card key={card.id} name={card.name} url={card.url}/>
           )
         })}
       </div>
