@@ -5,7 +5,8 @@ import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
-interface userData {
+import AIfunction from '@/components/AI'
+export interface userData {
   name: string;
   blog?: string;
   location?: string;
@@ -140,7 +141,7 @@ const page = () => {
     
     const user1Data = await fetchGithubUserData(username1, setavatar1);
     const user2Data = await fetchGithubUserData(username2, setavatar2);
-  
+    AIfunction({user1Data, user2Data})
     console.log("User 1 Data: ", user1Data);
     console.log("User 2 Data: ", user2Data);
   }
@@ -149,13 +150,6 @@ const page = () => {
   
   return (
     <div className='min-h-60 w-full flex flex-col gap-6 justify-center items-center'>
-      <div className="flex w-full max-w-sm items-center space-x-2 pt-10 ">
-        <div className='flex flex-col gap-3'>
-          <Input value={username1} onChange={(e) => setusername1(e.target.value)} type="text" placeholder="username1" title='username1' />
-          <Input value={username2} onChange={(e) => setusername2(e.target.value)} type="text" placeholder="username2" title='username2' />
-        </div>
-        <Button onClick={runFunc} type="submit" >{status}</Button>
-      </div>
       <div className='flex gap-10'>
         {/* <Image src={dogImg} alt='alt'/> */}
         <Avatar>
@@ -164,6 +158,17 @@ const page = () => {
         <Avatar>
           <AvatarImage sizes='900px' src={`${avatar2 ? avatar2 : '/dog.jpg'}`} height={500} className="rounded-full" />
         </Avatar>
+      </div>
+      <div className="flex w-full max-w-sm items-center space-x-2 pt-10 ">
+          <Input value={username1} onChange={(e) => setusername1(e.target.value)} type="text" placeholder="username1" title='username1' />
+          <Input value={username2} onChange={(e) => setusername2(e.target.value)} type="text" placeholder="username2" title='username2' />
+      </div>
+      <div className='flex gap-5'>
+        <Button variant={'outline'} className='min-w-28'>Reset</Button>
+        <Button onClick={runFunc} type="submit" >{status}</Button>
+      </div>
+      <div className='mt-5 w-full py-3 flex justify-center items-center'>
+        <Image src={'/rexx.gif'} alt='chilling' width={200} height={200} className='bg-transparent'/>
       </div>
       
     </div>
