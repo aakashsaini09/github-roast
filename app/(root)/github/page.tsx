@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { StaticImageData } from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
+import dogImg from '@/public/dog.jpg'
 interface userData {
     name: string;
     blog?: string;
@@ -125,9 +126,10 @@ const page = () => {
        <Button onClick={runFunc} type="submit" >{status}</Button>
     </div>
     <div>
+      {/* <Image src={dogImg} alt='alt'/> */}
     <Avatar>
-  <AvatarImage src={`${avatar ? avatar : 'https://github.com/shadcn.png'}`} />
-  <AvatarFallback>CN</AvatarFallback>
+  <AvatarImage sizes='900px' src={`${avatar ? avatar : '/dog.jpg'}`} height={500} className="rounded-full" // Add Tailwind classes if required
+ />
 </Avatar>
     </div>
     </div>
