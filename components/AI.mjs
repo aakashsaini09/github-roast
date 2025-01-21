@@ -54,6 +54,7 @@ export async function AIfunction({ user1Data, user2Data }) {
   - If the profiles are equally good, praise both users equally.
   - Ignore any links or unrelated content in the data.
   - Your response should be concise, insightful, and entertaining, suitable for direct display in the UI.
+  - If you see there is no data for any user (means user entered the wrong github Username) or user entered the same username for both users and you got same users to compare, then you can troll the user like you can't fool me or anything.
   `;
 
   try {

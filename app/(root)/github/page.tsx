@@ -26,9 +26,11 @@ export interface userData {
 const page = () => {
   const [username1, setusername1] = useState('')
   const [username2, setusername2] = useState('')
-  const [status, setstatus] = useState('Get feedback')
+  const [loading, setloading] = useState(false)
+  const [status, setstatus] = useState('Battle 🔥')
   const [avatar1, setavatar1] = useState<StaticImageData | null>(null)
   const [avatar2, setavatar2] = useState<StaticImageData | null>(null)
+  const [AiResponse, setAiResponse] = useState('')
   // init userData
   const user1Data: userData = {
     name: "",
@@ -42,6 +44,7 @@ const page = () => {
     }
   }
   async function fetchGithubUserData(username: string, setAvatar: React.Dispatch<React.SetStateAction<StaticImageData | null>>) {
+    setloading(true)
     const userData: any = {
       profileReadme: "",
       reposReadme: [],
@@ -85,6 +88,7 @@ const page = () => {
           userData.profileReadme = "No readme found";
         } else {
           console.error("Unexpected error fetching README:", errorMessage);
+          setloading(false)
         }
       }
   
@@ -105,7 +109,6 @@ const page = () => {
         );
       
         // Fetch READMEs for repositories along with descriptions
-        setstatus("Fetching repos README and descriptions...");
         for (const repo of reposWithStarOrFork) {
           try {
             const readme = await fetchReadme({
@@ -128,31 +131,34 @@ const page = () => {
         }
       } catch (error) {
         console.log("Error fetching repositories: ", error);
+        setloading(false)
       }
-      
-  
-      setstatus("Get feedback");
     } catch (error) {
-      setstatus("Get feedback");
+      setloading(false)
+      setstatus("Battle 🔥");
       console.log("Error in fetchGithubUserData: ", error);
     }
-  
+    setstatus("Battling...");
     return userData;
   }
   
   
   async function runFunc() {
-    setstatus("Loading...");
-    
     const user1Data = await fetchGithubUserData(username1, setavatar1);
     const user2Data = await fetchGithubUserData(username2, setavatar2);
-    const final = AIfunction({user1Data, user2Data})
-    console.log("Final: ", final)
-    console.log("User 1 Data: ", user1Data);
-    console.log("User 2 Data: ", user2Data);
+    const final = await AIfunction({user1Data, user2Data})
+    setAiResponse(final)  
+    setstatus("Battle 🔥")
+    setloading(false)
   }
   
-  
+  function resetFunction (){
+    setAiResponse("")
+    setavatar1(null)
+    setavatar2(null)
+    setusername1('')
+    setusername2("")
+  }
   
   return (
     <div className='min-h-60 w-full flex flex-col gap-6 justify-center items-center'>
@@ -170,11 +176,19 @@ const page = () => {
           <Input value={username2} onChange={(e) => setusername2(e.target.value)} type="text" placeholder="username2" title='username2' />
       </div>
       <div className='flex gap-5'>
-        <Button variant={'outline'} className='min-w-28'>Reset</Button>
-        <Button onClick={runFunc} type="submit" >{status}</Button>
+        <Button variant={'outline'} className={`min-w-28 ${loading ? 'cursor-not-allowed': 'cursor-pointer'}`} onClick={resetFunction} disabled={loading && true}>Reset</Button>
+        <Button onClick={runFunc} type="submit"disabled={loading && true} className={` ${loading ? 'cursor-not-allowed': 'cursor-pointer'}`} >{status}</Button>
       </div>
-      <div className='mt-5 w-full py-3 flex justify-center items-center'>
-        <Image src={'/rexx.gif'} alt='chilling' width={200} height={200} className='bg-transparent'/>
+      <div className='mt-5 w-full py-3 flex justify-center items-center mb-14'>
+        {
+          AiResponse.length <= 2 ?  
+          <Image src={'/rexx.gif'} alt='chilling' width={200} height={200} className='bg-transparent'/> : 
+          <div className=' px-7 container flex border dark:border-white border-black w-3/5 pt-5 flex-col font-second'>
+            <h2 className='text-lg font-bold font-second border-b border-gray-800 dark:border-gray-300 py-2 mb-4'>Response 🔥</h2>
+            <div className='font-semibold text-base pb-5'>{AiResponse}</div>
+          </div>
+        }
+       
       </div>
       
     </div>
