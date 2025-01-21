@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
@@ -156,6 +156,13 @@ const page = () => {
     setusername1('')
     setusername2("")
   }
+  useEffect(() => { 
+    if(username1.length <= 3 || username2.length <= 3){
+      setloading(true)
+    }else{
+      setloading(false)
+    }
+  }, [username1, username2])
   
   return (
     <div className='min-h-60 w-full pt-6 flex flex-col gap-6 justify-center items-center'>
