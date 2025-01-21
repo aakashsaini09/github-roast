@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
-import AIfunction from '@/components/AI'
+import { AIfunction } from '@/components/AI.mjs'
 export interface userData {
   name: string;
   blog?: string;
@@ -141,7 +141,8 @@ const page = () => {
     
     const user1Data = await fetchGithubUserData(username1, setavatar1);
     const user2Data = await fetchGithubUserData(username2, setavatar2);
-    AIfunction({user1Data, user2Data})
+    const final = AIfunction({user1Data, user2Data})
+    console.log("Final: ", final)
     console.log("User 1 Data: ", user1Data);
     console.log("User 2 Data: ", user2Data);
   }
