@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
 import { AIfunction } from '@/components/AI.mjs'
