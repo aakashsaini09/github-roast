@@ -40,7 +40,7 @@ const page = () => {
     }
   }
 
-  async function fetchGithubUserData(username: string, setAvatar: React.Dispatch<React.SetStateAction<StaticImageData | null>>) {
+  const fetchGithubUserData = async(username: string, setAvatar: React.Dispatch<React.SetStateAction<StaticImageData | null>>)=> {
     setloading(true)
     const userData: any = {
       profileReadme: "",
@@ -140,7 +140,7 @@ const page = () => {
   }
   
   
-  async function runFunc() {
+  const runFunc = async() =>{
     const user1Data = await fetchGithubUserData(username1, setavatar1);
     const user2Data = await fetchGithubUserData(username2, setavatar2);
     const final = await AIfunction({user1Data, user2Data})
@@ -149,7 +149,7 @@ const page = () => {
     setloading(false)
   }
   
-  function resetFunction (){
+  const resetFunction = async ()=>{
     setAiResponse("")
     setavatar1(null)
     setavatar2(null)

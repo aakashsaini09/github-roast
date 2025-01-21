@@ -1,5 +1,4 @@
-import { userData } from "@/app/(root)/github/page";
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const key = model.env.NEXT_APP_GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(key);
@@ -8,11 +7,7 @@ export async function AIfunction({ user1Data, user2Data }) {
   // Helper function to format repositories
   const formatRepos = (reposReadme) =>
     reposReadme
-      .map(
-        (repo) =>
-          `- **${repo.name}**: ${repo.description || "No description available"}\n  ${repo.readme.substring(0, 100)}${repo.readme.length > 100 ? "..." : ""}`
-      )
-      .join("\n");
+      .map((repo) =>`- **${repo.name}**: ${repo.description || "No description available"}\n  ${repo.readme.substring(0, 100)}${repo.readme.length > 100 ? "..." : ""}`).join("\n");
 
   // Summarize user data
   const user1Summary = `
