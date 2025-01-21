@@ -18,9 +18,11 @@ export interface userData {
   profileReadme?: string;
   reposReadme: {
     name: string;
+    description?: string;
     readme: string;
   }[];
 }
+
 const page = () => {
   const [username1, setusername1] = useState('')
   const [username2, setusername2] = useState('')
@@ -96,28 +98,30 @@ const page = () => {
           },
         });
         const reposData = await response.json();
-  
+      
         // Filter and process repositories
         const reposWithStarOrFork = reposData.filter(
           (repo: any) => repo.stargazers_count > 0 || repo.forks > 0
         );
-        const reposNames = reposWithStarOrFork.map((repo: any) => repo.name);
-  
-        // Fetch READMEs for repositories
-        setstatus("repos readme...");
-        for (const repo of reposNames) {
+      
+        // Fetch READMEs for repositories along with descriptions
+        setstatus("Fetching repos README and descriptions...");
+        for (const repo of reposWithStarOrFork) {
           try {
             const readme = await fetchReadme({
               username: username,
-              repository: repo,
+              repository: repo.name,
             });
+      
             userData.reposReadme.push({
-              name: repo,
+              name: repo.name,
+              description: repo.description || "No description available",
               readme: readme,
             });
           } catch (error) {
             userData.reposReadme.push({
-              name: repo,
+              name: repo.name,
+              description: repo.description || "No description available",
               readme: "No readme found",
             });
           }
@@ -125,6 +129,7 @@ const page = () => {
       } catch (error) {
         console.log("Error fetching repositories: ", error);
       }
+      
   
       setstatus("Get feedback");
     } catch (error) {
