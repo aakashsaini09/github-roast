@@ -1,9 +1,9 @@
 import { userData } from "@/app/(root)/github/page";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI("AIzaSyCLPuwCulCc8pxRdCE2AVvak2zjaKForgU");
+const key = model.env.NEXT_APP_GEMINI_API_KEY
+const genAI = new GoogleGenerativeAI(key);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
 export async function AIfunction({ user1Data, user2Data }) {
   // Helper function to format repositories
   const formatRepos = (reposReadme) =>
