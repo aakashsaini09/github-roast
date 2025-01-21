@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Image, { StaticImageData } from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
 import { AIfunction } from '@/components/AI.mjs'
+import Footer from '@/components/Footer'
 export interface userData {
   name: string;
   blog?: string;
@@ -31,11 +32,6 @@ const page = () => {
   const [avatar1, setavatar1] = useState<StaticImageData | null>(null)
   const [avatar2, setavatar2] = useState<StaticImageData | null>(null)
   const [AiResponse, setAiResponse] = useState('')
-  // init userData
-  const user1Data: userData = {
-    name: "",
-    reposReadme: [],
-  };
   function GithubAnalyse(username1: string) {
     return {
       profile: `https://api.github.com/users/${username1}`,
@@ -43,6 +39,7 @@ const page = () => {
       profileRepos: `https://api.github.com/users/${username1}/repos?per_page=1000`,
     }
   }
+
   async function fetchGithubUserData(username: string, setAvatar: React.Dispatch<React.SetStateAction<StaticImageData | null>>) {
     setloading(true)
     const userData: any = {
@@ -161,17 +158,28 @@ const page = () => {
   }
   
   return (
-    <div className='min-h-60 w-full flex flex-col gap-6 justify-center items-center'>
+    <div className='min-h-60 w-full pt-6 flex flex-col gap-6 justify-center items-center'>
       <div className='flex gap-10'>
         {/* <Image src={dogImg} alt='alt'/> */}
         <Avatar>
-          <AvatarImage sizes='900px' src={`${avatar1 ? avatar1 : '/dog.jpg'}`} height={500} className="rounded-full" />
+          <AvatarImage
+            sizes="900px"
+            src={`${avatar1 ? avatar1 : '/dog.jpg'}`}
+            height={500}
+            className="rounded-full transform transition-transform duration-300 hover:scale-110"
+          />
         </Avatar>
         <Avatar>
-          <AvatarImage sizes='900px' src={`${avatar2 ? avatar2 : '/dog.jpg'}`} height={500} className="rounded-full" />
+          <AvatarImage
+            sizes="900px"
+            src={`${avatar2 ? avatar2 : '/dog.jpg'}`}
+            height={500}
+            className="rounded-full transform transition-transform duration-300 hover:scale-110"
+          />
         </Avatar>
+
       </div>
-      <div className="flex w-full max-w-sm items-center space-x-2 pt-10 ">
+      <div className="flex w-full max-w-md items-center space-x-2 pt-10 ">
           <Input value={username1} onChange={(e) => setusername1(e.target.value)} type="text" placeholder="username1" title='username1' />
           <Input value={username2} onChange={(e) => setusername2(e.target.value)} type="text" placeholder="username2" title='username2' />
       </div>
@@ -182,7 +190,7 @@ const page = () => {
       <div className='mt-5 w-full py-3 flex justify-center items-center mb-14'>
         {
           AiResponse.length <= 2 ?  
-          <Image src={'/rexx.gif'} alt='chilling' width={200} height={200} className='bg-transparent'/> : 
+          <Image src={'/rexx.gif'} alt='chilling' width={300} height={300} className='bg-transparent'/> : 
           <div className=' px-7 container flex border dark:border-white border-black w-3/5 pt-5 flex-col font-second'>
             <h2 className='text-lg font-bold font-second border-b border-gray-800 dark:border-gray-300 py-2 mb-4'>Response 🔥</h2>
             <div className='font-semibold text-base pb-5'>{AiResponse}</div>
@@ -190,7 +198,7 @@ const page = () => {
         }
        
       </div>
-      
+      <Footer/>
     </div>
   )
 }

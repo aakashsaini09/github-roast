@@ -7,17 +7,20 @@ export default function Home() {
     {
       id: 1,
       name: 'Github',
-      url: '/github'
+      url: '/github',
+      des: 'Github Des'
     },
     {
       id: 2,
       name: 'Twiter',
-      url: '/twitter'
+      url: '/twitter',
+      des: 'Twiter Des'
     },
     {
       id: 3,
       name: 'Linkedin',
-      url: '/linkedin'
+      url: '/linkedin',
+      des: 'Linkedin Des'
     },
   ]
   return (
@@ -25,7 +28,7 @@ export default function Home() {
       <div className="flex flex-wrap justify-center mt-10 pt-7 gap-4 md:gap-9">
         {socials.map((card) => {
           return (
-            <Card key={card.id} name={card.name} url={card.url}/>
+            <Card key={card.id} name={card.name} url={card.url} des={card.des}/>
           )
         })}
       </div>

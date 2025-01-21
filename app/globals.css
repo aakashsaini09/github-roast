@@ -76,3 +76,7 @@ body {
     @apply bg-background text-foreground;
   }
 }
+/* .clearNav {
+  backdrop-filter: saturate(180%) blur(5px) !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+} */
