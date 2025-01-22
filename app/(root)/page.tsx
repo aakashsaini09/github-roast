@@ -21,6 +21,7 @@ export default function Home() {
       des: 'Linkedin Des'
     },
   ]
+  // console.log("key in root page:: ", process.env.NEXT_APP_GEMINI_API_KEY)
   return (
     <main className="min-h-screen container">
       <div className="flex flex-wrap justify-center mt-10 pt-7 gap-4 md:gap-9">

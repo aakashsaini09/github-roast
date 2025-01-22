@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
 import { AIfunction } from '@/components/AI.mjs'
 import Footer from '@/components/Footer'
@@ -25,12 +25,13 @@ export interface userData {
 }
 
 const page = () => {
+  console.log("github page: ", process.env.NEXT_PUBLIC_GEMINI_API_KEY)
   const [username1, setusername1] = useState('')
   const [username2, setusername2] = useState('')
   const [loading, setloading] = useState(false)
   const [status, setstatus] = useState('Battle 🔥')
-  const [avatar1, setavatar1] = useState<StaticImageData | null>(null)
-  const [avatar2, setavatar2] = useState<StaticImageData | null>(null)
+  const [avatar1, setavatar1] = useState<string | null>(null);
+  const [avatar2, setavatar2] = useState<string | null>(null)
   const [AiResponse, setAiResponse] = useState('')
   function GithubAnalyse(username1: string) {
     return {
@@ -39,8 +40,7 @@ const page = () => {
       profileRepos: `https://api.github.com/users/${username1}/repos?per_page=1000`,
     }
   }
-
-  const fetchGithubUserData = async(username: string, setAvatar: React.Dispatch<React.SetStateAction<StaticImageData | null>>)=> {
+  const fetchGithubUserData = async(username: string, setAvatar: React.Dispatch<React.SetStateAction<string | null>>)=> {
     setloading(true)
     const userData: any = {
       profileReadme: "",
@@ -48,7 +48,6 @@ const page = () => {
     };
     const urls = GithubAnalyse(username);
     try {
-      // Fetch user profile
       let response = await fetch(urls.profile, {
         method: "GET",
         headers: {
@@ -56,13 +55,10 @@ const page = () => {
         },
       });
       let data = await response.json();
-      // Fetch avatar as a Blob and convert it to a compatible format
       const avatarResponse = await fetch(data.avatar_url);
       const avatarBlob = await avatarResponse.blob();
-      const avatarObjectURL = URL.createObjectURL(avatarBlob); // Generate a local URL
-      setAvatar(avatarObjectURL as unknown as StaticImageData); // Cast as StaticImageData
-  
-      // Other user profile data
+      const avatarObjectURL = URL.createObjectURL(avatarBlob);
+      setAvatar(avatarObjectURL as unknown as string);
       userData.name = data.name;
       userData.blog = data.blog || null;
       userData.location = data.location || null;
@@ -71,7 +67,6 @@ const page = () => {
       userData.followers = data.followers || 0;
       userData.following = data.following || 0;
       userData.public_repos = data.public_repos || 0;
-      // Fetch user's README
       setstatus("readme...");
       try {
         const readme = await fetchReadme({
