@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/10c3c1ba-aeed-4d82-af2e-d55ec02097a9"/>
+</div>
 
-## Getting Started
+# 🔰 Github-roast
 
-First, run the development server:
+- Use AI to analyze and compare two GitHub profiles. Get praised, get roasted, and most importantly, have fun! Also, see a Chart Comparison between both profiles.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Web build deployed on `vercel` under free tier [Link](https://github-war.netlify.app/).
+
+## 📚 Tech Stack
+
+- Next.js
+- Tailwind CSS
+- Shad-CN (UI Component)
+- Github API
+- Gemini API
+
+
+## 🔩 Environment Variables
+
+- The environment variables are configured in `.env.example` file
+- `NEXT_PUBLIC_GEMINI_API_KEY=`
+
+
+## 🔨 Setting Up
+
+Follow the following instructions to set up the project and run it locally
+
+- Run `npm install` to install all the dependencies.
+- Run `npm run dev` to start the development server.
+- Get your API key from Gemini and paste it into the .env file with `NEXT_PUBLIC_GEMINI_API_KEY` this name.
+- To make a web build run `npm run build` and the build files will be generated in the `dist` folder.
+
+## ⚡ Features
+
+- The app takes your GitHub username and compares it with the other user's profile you have entered.
+- Based on the comparison it trolls you or praises you.
+- See the detailed analyses/comparison with the graph at the bottom of the page.
+- Set the mode to dark/light according to your need.
+
+## 📁 File Structure :
+
+```
+.
+├── assets
+│   │── images
+│   │   
+│   │── favicon.png
+│   │── splash.png
+│   │── icon.png
+│   └── adaptive-icon.png
+├── components
+│   │── UI
+│   │── └── ... ShadCn Components
+│   │── Cart.tsx
+│   │── Chart.tsx
+│   │── Footer.tsx
+│   │── Mode-toggle.tsx
+│   └── Navbar.tsx
+├── app
+│   └── ... /(root)/github
+├── └── page.tsx
+├── └── layout.tsx
+├── .env.example
+├── package.json
+├── package-lock.json
+├── README.md
+└── .gitignore
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/bd1c8c14-8491-446c-835f-9bd053fd2ea8"/>
+</div>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Support
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+If you like this project, give it a ⭐
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
