@@ -25,7 +25,6 @@ export interface userData {
 }
 
 const page = () => {
-  console.log("github page: ", process.env.NEXT_PUBLIC_GEMINI_API_KEY)
   const [username1, setusername1] = useState('')
   const [username2, setusername2] = useState('')
   const [loading, setloading] = useState(false)
