@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { fetchReadme } from '@varandas/fetch-readme'
 import { AIfunction } from '@/components/AI.mjs'
 import Footer from '@/components/Footer'
+import Chart from '@/components/Chart'
 export interface userData {
   name: string;
   blog?: string;
@@ -31,6 +32,7 @@ const page = () => {
   const [status, setstatus] = useState('Battle 🔥')
   const [avatar1, setavatar1] = useState<string | null>(null);
   const [avatar2, setavatar2] = useState<string | null>(null)
+  const [chartData, setchartData] = useState([{}])
   const [AiResponse, setAiResponse] = useState('')
   function GithubAnalyse(username1: string) {
     return {
@@ -138,11 +140,46 @@ const page = () => {
     const user1Data = await fetchGithubUserData(username1, setavatar1);
     const user2Data = await fetchGithubUserData(username2, setavatar2);
     const final = await AIfunction({user1Data, user2Data})
-    setAiResponse(final)  
+    const temp = processResponse(final)
+    setchartData(temp)
     setstatus("Battle 🔥")
     setloading(false)
   }
+  const processResponse = (response: any) => {
+    try {
+      // Extract the JSON block within triple backticks
+      const jsonMatch = response.match(/```json\s*([\s\S]*?)\s*```/);
   
+      if (jsonMatch && jsonMatch[1]) {
+        // Extract the string part (everything before the JSON block)
+        const stringPart = response.split("```json")[0].trim();
+  
+        // Set the string part to AiResponse
+        setAiResponse(stringPart);
+  
+        // Parse the JSON content
+        const resultJson = JSON.parse(jsonMatch[1]);
+  
+        return resultJson; // Return the JSON array if needed
+      } else {
+        console.error("No JSON block found in the response.");
+  
+        // If no JSON block is found, set the full response as the string
+        setAiResponse(response.trim());
+        return null;
+      }
+    } catch (error) {
+      console.error("Failed to parse the JSON block:", error);
+  
+      // Set the full response as the string if parsing fails
+      setAiResponse(response.trim());
+      return null;
+    }
+  };
+  
+  
+
+
   const resetFunction = async ()=>{
     setAiResponse("")
     setavatar1(null)
@@ -157,35 +194,32 @@ const page = () => {
       setloading(false)
     }
   }, [username1, username2])
-  
+  // let temp2 = [
+  //   { Skill: "Visiblity", Aman: 186, Aakash: 80 },
+  //   { Skill: "Repos", Aman: 305, Aakash: 200 },
+  //   { Skill: "Profile README", Aman: 237, Aakash: 120 },
+  //   { Skill: "Repos Readme", Aman: 73, Aakash: 190 },
+  //   { Skill: "Popular", Aman: 209, Aakash: 130 },
+  //   { Skill: "Overall", Aman: 214, Aakash: 140 },
+  // ]
   return (
-    <div className='min-h-60 w-full pt-6 flex flex-col gap-6 justify-center items-center'>
-      <div className='flex gap-10'>
-        {/* <Image src={dogImg} alt='alt'/> */}
-        <Avatar>
-          <AvatarImage
-            sizes="900px"
-            src={`${avatar1 ? avatar1 : '/dog.jpg'}`}
-            height={500}
-            className="rounded-full transform transition-transform duration-300 hover:scale-110"
-          />
-        </Avatar>
-        <Avatar>
-          <AvatarImage
-            sizes="900px"
-            src={`${avatar2 ? avatar2 : '/dog.jpg'}`}
-            height={500}
-            className="rounded-full transform transition-transform duration-300 hover:scale-110"
-          />
-        </Avatar>
+    <div className='min-h-60 w-full pt-6 flex flex-col gap-6 justify-center items-center font-second'>
 
+      <div className='flex gap-10'>
+        <Avatar className='border-2 border-black dark:border-white'>
+          <AvatarImage sizes="900px" src={`${avatar1 ? avatar1 : '/profile.jpg'}`} className="rounded-full transform transition-transform duration-300 hover:scale-110 " />
+        </Avatar>
+        <div className="text-sm h-[30%] my-auto sm:text-base md:text-xl lg:text-4xl font-black bg-black text-white dark:bg-white dark:text-gray-800 font-second px-2 py-1 sm:px-4 sm:py-2 md:px-6 md:py-3 rounded-xl shadow-2xl transform hover:scale-110 transition-transform duration-300">VS</div>
+        <Avatar className='border-2 border-black dark:border-white'>
+          <AvatarImage sizes="900px" src={`${avatar2 ? avatar2 : '/profile.jpg'}`} className="rounded-full transform transition-transform duration-300 hover:scale-110" />
+        </Avatar>
       </div>
-      <div className="flex w-full max-w-md items-center space-x-2 pt-10 ">
+      <div className="flex w-full max-w-md items-center space-x-2 pt-10">
           <Input value={username1} onChange={(e) => setusername1(e.target.value)} type="text" placeholder="username1" title='username1' />
           <Input value={username2} onChange={(e) => setusername2(e.target.value)} type="text" placeholder="username2" title='username2' />
       </div>
-      <div className='flex gap-5'>
-        <Button variant={'outline'} className={`min-w-28 ${loading ? 'cursor-not-allowed': 'cursor-pointer'}`} onClick={resetFunction} disabled={loading && true}>Reset</Button>
+      <div className='flex gap-10'>
+        <Button variant={'outline'} className={`min-w-24  flex justify-center items-center ${loading ? 'cursor-not-allowed': 'cursor-pointer'}`} onClick={resetFunction} disabled={loading && true}>Reset</Button>
         <Button onClick={runFunc} type="submit"disabled={loading && true} className={` ${loading ? 'cursor-not-allowed': 'cursor-pointer'}`} >{status}</Button>
       </div>
       <div className='mt-5 w-full py-3 flex justify-center items-center mb-14'>
@@ -197,8 +231,14 @@ const page = () => {
             <div className='font-semibold text-base pb-5'>{AiResponse}</div>
           </div>
         }
-       
       </div>
+      {/* <Button onClick={getChart}>Get Chart</Button> */}
+      {AiResponse.length >= 5 ? <div className='w-full'>
+        <div className='w-[60%] mx-auto'>
+          <h2 className='font-semibold font-second text-4xl py-6'>Profiles Analytics</h2>
+        </div>
+        <Chart chartDataArray={chartData}/>
+      </div> : ''}
       <Footer/>
     </div>
   )

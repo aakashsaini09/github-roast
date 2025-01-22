@@ -33,7 +33,7 @@ export async function AIfunction({ user1Data, user2Data }) {
   const user2Summary = `
   Name: ${user2Data.name || "Unknown"}
   Bio: ${user2Data.bio || "No bio available"}
-  Blog: ${user2Data.blog || "No blog"}
+  Portfolio Website: ${user2Data.blog || "No blog"}
   Location: ${user2Data.location || "No location"}
   Company: ${user2Data.company || "No company"}
   Followers: ${user2Data.followers || 0}
@@ -56,7 +56,26 @@ export async function AIfunction({ user1Data, user2Data }) {
   - Ignore any links or unrelated content in the data.
   - Your response should be concise, insightful, and entertaining, suitable for direct display in the UI.
   - If you see there is no data for any user (means user entered the wrong github Username) or user entered the same username for both users and you got same data to compare, then you can troll the user like you can't fool me or anything.
-  `;
+  - At the end of the string, attach a properly formatted JSON array named 'resultArray' where you rate both users on the following criteria: "Visibility", "Repos", "Profile Completeness", "Profile README", "Repository README", and "Overall" (each scored out of 100). 
+  - After your feedback, include a JSON array named 'resultArray' that rates both users on the following criteria: "Visibility", "Repos", "Profile Completeness", "Profile README", "Repository README", and "Overall". Each criterion is scored out of 100.
+  - The 'resultArray' must be enclosed in triple backticks (\`\`\`) and formatted as valid JSON. Do not attach it to the end of a sentence. It should appear as a separate block.
+  - Example response format:
+    "Shri Narendra Modi was sworn-in as India’s Prime Minister for the third time on 9th June 2024.
+
+    \`\`\`json
+    [
+      { "Skill": "Visibility", "Aakash": 70, "Aman": 30 },
+      { "Skill": "Repos", "Aakash": 60, "Aman": 80 },
+      { "Skill": "Profile Completeness", "Aakash": 75, "Aman": 40 },
+      { "Skill": "Profile README", "Aakash": 60, "Aman": 0 },
+      { "Skill": "Repository README", "Aakash": 50, "Aman": 10 },
+      { "Skill": "Overall", "Aakash": 60, "Aman": 30 }
+    ]
+    \`\`\`
+    "
+    - Ensure the JSON array always uses double quotes for keys and string values.
+    - Avoid including any additional comments or explanations inside the JSON block.
+    `;
 
   try {
     const result = await model.generateContent(prompt);
