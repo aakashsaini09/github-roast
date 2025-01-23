@@ -13,10 +13,10 @@ import {
 const Navbar = () => {
 
     return (
-        <nav className="bg-background/50 sticky backdrop-blur-sm top-0 py-2 md:py-3 px-2 md:px-10 z-50 dark:bg-black dark:bg-opacity-70 dark:backdrop-blur-[5px]">
+        <nav className="bg-background/50 sticky backdrop-blur-sm font-second top-0 py-2 md:py-3 px-2 md:px-10 z-50 dark:bg-black dark:bg-opacity-70 dark:backdrop-blur-[5px]">
             <div className="container mx-auto px-4 py-2 justify-between items-center md:flex hidden">
                 <Link href="/">
-                    <span className="text-xl font-bold">AakashBlog</span>
+                    <span className="text-xl font-bold">Github-War</span>
                 </Link>
                 <div className="space-x-4 flex items-center">
                     <Link href="/">
@@ -36,7 +36,7 @@ const Navbar = () => {
             </div>
 
             <div className='md:hidden flex container mx-auto px-4 py-2 justify-between items-center'>
-                <div className='font-bold text-accent'>AakashBlog</div>
+                <div className='font-bold text-accent'>Github War</div>
 
                 <Sheet>
                     <div className='my-auto flex justify-center items-center gap-2'>

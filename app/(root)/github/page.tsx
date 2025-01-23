@@ -204,7 +204,6 @@ const page = () => {
   // ]
   return (
     <div className='min-h-60 w-full pt-6 flex flex-col gap-6 justify-center items-center font-second'>
-
       <div className='flex gap-10'>
         <Avatar className='border-2 border-black dark:border-white'>
           <AvatarImage sizes="900px" src={`${avatar1 ? avatar1 : '/profile.jpg'}`} className="rounded-full transform transition-transform duration-300 hover:scale-110 " />

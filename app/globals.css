@@ -93,7 +93,62 @@ body {
     @apply bg-background text-foreground;
   }
 }
-/* .clearNav {
+.Avenir {
+  font-family: AvenirNextW10-Bold;
+  font-display: swap;
+}
+
+.grr {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.txg {
+  color: #b8bcbf;
+}
+
+.ld-04 {
+  letter-spacing: 0.025em;
+}
+
+.lh-6 {
+  line-height: 1.08;
+}
+
+.text-80 {
+  font-size: 80px;
+}
+
+.font-4 {
+  font-family: Inter, sans-serif;
+}
+
+.tr04 {
+  transition: 0.4s;
+}
+
+.clearNav {
   backdrop-filter: saturate(180%) blur(5px) !important;
   background-color: rgba(0, 0, 0, 0.7) !important;
-} */
+}
+
+.fsac4 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 32px;
+}
+
+@media (min-width: 720px) {
+  .fsac4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.ktq4 {
+  background-color: #101111;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.fkrr1 {
+  font-family: "Inter", sans-serif;
+}
