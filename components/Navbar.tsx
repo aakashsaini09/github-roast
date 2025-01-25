@@ -19,24 +19,19 @@ const Navbar = () => {
                     <span className="text-xl font-bold">Github-War</span>
                 </Link>
                 <div className="space-x-4 flex items-center">
-                    <Link href="/">
-                        <span className="">Home</span>
+                    <Link href={'/'}>
+                        <span className="cursor-pointer">Home</span>
                     </Link>
-                    <Link href="/about">
-                        <span className="">About</span>
-                    </Link>
-                    <Link href="/contact">
-                        <span className="">Contact</span>
-                    </Link>
-                    <Link href="/blog">
-                        <span className="">Blog</span>
-                    </Link>
+                    <span className="cursor-pointer">About</span>
+                    <span className="cursor-pointer">Contact</span>
+                    <span className="cursor-pointer">Blog</span>
+                    
                     <ModeToggle />
                 </div>
             </div>
 
             <div className='md:hidden flex container mx-auto px-4 py-2 justify-between items-center'>
-                <div className='font-bold text-accent'>Github War</div>
+                <div className='font-bold text-accent text-black dark:text-white'>Github War</div>
 
                 <Sheet>
                     <div className='my-auto flex justify-center items-center gap-2'>
