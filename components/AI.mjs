@@ -17,31 +17,31 @@ export async function AIfunction({ user1Data, user2Data }) {
 
   // Summarize user data
   const user1Summary = `
-  Name: ${user1Data.name || "Unknown"}
-  Bio: ${user1Data.bio || "No bio available"}
-  Blog: ${user1Data.blog || "No blog"}
-  Location: ${user1Data.location || "No location"}
-  Company: ${user1Data.company || "No company"}
+  Name: ${user1Data.name || ""}
+  Bio: ${user1Data.bio || ""}
+  Blog: ${user1Data.blog || ""}
+  Location: ${user1Data.location || ""}
+  Company: ${user1Data.company || ""}
   Followers: ${user1Data.followers || 0}
   Following: ${user1Data.following || 0}
   Public Repos: ${user1Data.public_repos || 0}
-  Profile README: ${user1Data.profileReadme ? user1Data.profileReadme.substring(0, 200) : "No profile README available"}
+  Profile README: ${user1Data.profileReadme ? user1Data.profileReadme.substring(0, 200) : ""}
   Notable Repositories:
-  ${user1Data.reposReadme.length > 0 ? formatRepos(user1Data.reposReadme) : "No notable repositories"}
+  ${user1Data.reposReadme.length > 0 ? formatRepos(user1Data.reposReadme) : ""}
   `;
 
   const user2Summary = `
-  Name: ${user2Data.name || "Unknown"}
-  Bio: ${user2Data.bio || "No bio available"}
-  Portfolio Website: ${user2Data.blog || "No blog"}
-  Location: ${user2Data.location || "No location"}
-  Company: ${user2Data.company || "No company"}
+  Name: ${user2Data.name || ""}
+  Bio: ${user2Data.bio || ""}
+  Portfolio Website: ${user2Data.blog || ""}
+  Location: ${user2Data.location || ""}
+  Company: ${user2Data.company || ""}
   Followers: ${user2Data.followers || 0}
   Following: ${user2Data.following || 0}
   Public Repos: ${user2Data.public_repos || 0}
-  Profile README: ${user2Data.profileReadme ? user2Data.profileReadme.substring(0, 200) : "No profile README available"}
+  Profile README: ${user2Data.profileReadme ? user2Data.profileReadme.substring(0, 200) : ""}
   Notable Repositories:
-  ${user2Data.reposReadme.length > 0 ? formatRepos(user2Data.reposReadme) : "No notable repositories"}
+  ${user2Data.reposReadme.length > 0 ? formatRepos(user2Data.reposReadme) : ""}
   `;
 
   const prompt = `
@@ -50,11 +50,11 @@ export async function AIfunction({ user1Data, user2Data }) {
   Second: ${user2Summary}
   Your task:
   - Compare the profiles, if one profile is clearly better, praise that user. Be witty and engaging, and use emojis to emphasize your points.
-  - If one profile is weaker, humorously criticize it with jokes. You are allowed to use bad words too and the person who's profile is good praise him like anything.
-  - If the profiles are equally good, praise both users equally.
+  - If one profile is weaker, roast brutally and humorously criticize it with jokes. You are allowed to use bad words too and the person who's profile is good praise him like anything.
+  - If the profiles are equally good, praise both users equally. Try give them feedback to improve more.
   - Ignore any links or unrelated content in the data.
   - Your response should be concise, insightful, and entertaining, suitable for direct display in the UI.
-  - If you see there is no data for any user (means user entered the wrong github Username) or user entered the same username for both users and you got same data to compare, then you can troll the user like you can't fool me or anything.
+  - If you see there is no data for one or both users (means user entered the wrong github Username) or user entered the same username for both users and you got same data to compare, then you can troll the user like you can't fool me or anything.
   - After your feedback, include a JSON array named 'resultArray' that rates both users on the following criteria: "Visibility", "Repos", "Profile Completeness", "Profile README", "Repository README", and "Overall". Each criterion is scored out of 100.
   - The 'resultArray' must be enclosed in triple backticks (\`\`\`) and formatted as valid JSON. Do not attach it to the end of a sentence. It should appear as a separate block.
   - Example response format:
