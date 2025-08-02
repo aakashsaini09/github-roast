@@ -48,25 +48,25 @@ export default function Home() {
         <Accordion type="single" collapsible className="font-second mt-3">
           <AccordionItem value="item-1" className="border-2 rounded-md px-3 my-3">
             <AccordionTrigger className="text-sm md:text-lg">Does it store any user data?</AccordionTrigger>
-            <AccordionContent className="text-white/85">
+            <AccordionContent className="text-slate-700 dark:text-white/85">
               No, we do not store any user data. We only fetch publicly available GitHub data using the GitHub API.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2" className="border-2 rounded-md px-3 my-3">
             <AccordionTrigger className="text-sm md:text-lg">What criteria are used for comparison?</AccordionTrigger>
-            <AccordionContent className="text-white/85">
+            <AccordionContent className="text-slate-700 dark:text-white/85">
               The comparison is based on basic details such as followers, following, repositories, profile README, total repositories, and repository data (description and README files) for repos with more than 2 forks or stars.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3" className="border-2 rounded-md px-3 my-3">
             <AccordionTrigger className="text-sm md:text-lg">Why does it take a while to process my profile?</AccordionTrigger>
-            <AccordionContent className="text-white/85">
+            <AccordionContent className="text-slate-700 dark:text-white/85">
               We analyze all repositories with more than 2 forks or stars to gather detailed data. If your profile has many such repositories, it may take longer to process.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4" className="border-2 rounded-md px-3 my-3">
             <AccordionTrigger className="text-sm md:text-lg">How accurate is the analysis?</AccordionTrigger>
-            <AccordionContent className="text-white/85">
+            <AccordionContent className="text-slate-700 dark:text-white/85">
               The analysis is based on basic data like repository descriptions and README files, not the actual code or its impact. If your project is excellent but lacks a well-detailed description or README file, it might not perform well in the comparison. 🙂
             </AccordionContent>
           </AccordionItem>
