@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import React, { useEffect, useState } from 'react'
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import Image from 'next/image'
-import { fetchReadme } from '@varandas/fetch-readme'
+const { fetchReadme } = require('@varandas/fetch-readme');
 import { AIfunction } from '@/components/AI.mjs'
 import Footer from '@/components/Footer'
 import Chart from '@/components/Chart'

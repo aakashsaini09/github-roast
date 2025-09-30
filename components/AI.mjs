@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const key = process.env.NEXT_PUBLIC_GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(key);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 export async function AIfunction({ user1Data, user2Data }) {
   // Helper function to format repositories
@@ -78,6 +78,7 @@ export async function AIfunction({ user1Data, user2Data }) {
 
   try {
     const result = await model.generateContent(prompt);
+    console.log("Resule: ", result)
     return result.response.text(); // Return response for frontend
   } catch (error) {
     console.error("Error in AI Function:", error);
