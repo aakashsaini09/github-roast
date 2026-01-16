@@ -112,7 +112,7 @@ export default function Hero() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <div className="  bg-white dark:bg-black shadow-lg shadow-gray-500 rounded-2xl transition-shadow p-6 md:p-8 border-4 border-gray-100 dark:border-black/50">
+            <div className="  bg-white dark:bg-black shadow-lg shadow-gray-900 rounded-2xl transition-shadow p-6 md:p-8 border-4 border-gray-100 dark:border-black/50">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
                   <MdOutlineSecurity className="text-2xl text-purple-600 dark:text-purple-400" />
