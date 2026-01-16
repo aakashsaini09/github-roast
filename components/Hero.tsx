@@ -1,120 +1,70 @@
+import Hero from "@/components/Hero";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
-        import Image from "next/image";
-import Link from "next/link";
-import { MdOutlineSecurity } from "react-icons/md";
-import { FaHeart } from "react-icons/fa";
-import { FaShare } from "react-icons/fa";
-import { FaFaceSmileWink } from "react-icons/fa6";
-export default function Hero() {
+export default function Home() {
   return (
-    <div className="font-second">
-      <div className="min-h-[80vh] flex flex-col">
-        <main className="flex-col px-4">
-            <div className="flex flex-col md:flex-row items-center justify-center pt-12">
-                <div className="text-center flex flex-col">
-                    <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                    GitHub Wars ⚔️<br /> <span className="sm:text-2xl lg:text-4xl">Showdown of the Repositories</span>
-                    </h1>
-                    <p className="text-sm md:text-lg text-gray-800 dark:text-gray-300 max-w-xl md:max-w-2xl mx-auto mb-6">
-                    GitHub profiles go head-to-head in a fun, AI-driven battle of coding prowess.
-                    </p>
-                </div>
-                <div className="w-[80vw] hidden md:flex justify-center items-center md:w-[30%]">
-                    <Image src={'/robo.png'} alt='chilling' width={500} height={500} className='bg-transparent'/>
-                </div>
-            </div>
-            <div className="w-full flex items-center justify-center my-7 mb-28">
-                    <Link href="/github" className="inline-flex text-center mx-auto items-center bg-black border hover:bg-gray-800 text-white justify-center rounded-md px-6 py-3 font-medium transition-colors duration-300" aria-label="Get Started and Login"> Let's Go 🦾
-                    {/* <MdLogin className="ml-2 w-5 h-5" /> */}
-                    </Link>
-            </div>
-        </main>
+    <main className="min-h-screen">
+      {/* Hero Section */}
+      <div className="w-full">
+        <Hero />
       </div>
 
-      <div className="w-full flex justify-center -mt-10 md:-mt-20 px-4">
-        <div className="w-full md:w-4/5 relative">
-          <Image
-            src="/landing2.jpg"
-            alt="stats dash image"
-            width={1200}
-            height={800}
-            className="w-full h-auto"
-          />
-        </div>
-      </div>
+      {/* FAQ Section */}
+      <div className="w-full px-4 py-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="font-semibold text-purple-600 text-lg md:text-xl font-second mb-3">
+              FAQ
+            </div>
+            <h2 className="font-extrabold text-3xl md:text-5xl font-second">
+              Most asked questions.
+            </h2>
+          </div>
 
-      <div className="container w-full flex flex-col md:flex-row justify-evenly text-center font-semibold py-8 px-4 md:px-52">
-        <div className="mb-6 md:mb-0">
-          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">300+</span>
-          <p className="text-sm sm:text-base md:text-lg lg:text-sm mt-2">
-            Active Users
-          </p>
-        </div>
-        <div className="hidden md:block">
-          <hr className="bg-gray-800 dark:bg-gray-400 h-20 w-0.5 mx-5" />
-        </div>
-        <div className="mb-6 md:mb-0">
-          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">100+</span>
-          <p className="text-sm sm:text-base md:text-lg lg:text-sm mt-2">
-            Request per day
-          </p>
-        </div>
-        <div className="hidden md:block">
-          <hr className="bg-gray-900 dark:bg-gray-400 h-20 w-0.5 mx-5" />
-        </div>
-        <div>
-          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">1000+</span>
-          <p className="text-sm sm:text-base md:text-lg lg:text-sm mt-2">
-            Total Requests
-          </p>
+          <Accordion type="single" collapsible className="font-second space-y-4">
+            <AccordionItem value="item-1" className="border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 md:px-6 shadow-sm hover:shadow-md transition-shadow">
+              <AccordionTrigger className="text-sm md:text-lg font-semibold py-4">
+                Does it store any user data?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-700 dark:text-white/85 pb-4 text-sm md:text-base">
+                No, we do not store any user data. We only fetch publicly available GitHub data using the GitHub API.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2" className="border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 md:px-6 shadow-sm hover:shadow-md transition-shadow">
+              <AccordionTrigger className="text-sm md:text-lg font-semibold py-4">
+                What criteria are used for comparison?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-700 dark:text-white/85 pb-4 text-sm md:text-base">
+                The comparison is based on basic details such as followers, following, repositories, profile README, total repositories, and repository data (description and README files) for repos with more than 2 forks or stars.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-3" className="border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 md:px-6 shadow-sm hover:shadow-md transition-shadow">
+              <AccordionTrigger className="text-sm md:text-lg font-semibold py-4">
+                Why does it take a while to process my profile?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-700 dark:text-white/85 pb-4 text-sm md:text-base">
+                We analyze all repositories with more than 2 forks or stars to gather detailed data. If your profile has many such repositories, it may take longer to process.
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-4" className="border-2 border-gray-200 dark:border-gray-700 rounded-xl px-4 md:px-6 shadow-sm hover:shadow-md transition-shadow">
+              <AccordionTrigger className="text-sm md:text-lg font-semibold py-4">
+                How accurate is the analysis?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-700 dark:text-white/85 pb-4 text-sm md:text-base">
+                The analysis is based on basic data like repository descriptions and README files, not the actual code or its impact. If your project is excellent but lacks a well-detailed description or README file, it might not perform well in the comparison. 🙂
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
-      {/* <Cards/> */}
-      <section>
-      <h2 className="pt-40 mb-1 text-2xl tracking-tighter font-serif font-extrabold text-center text-gray-900 dark:text-gray-200 lg:text-7xl md:text-6xl">
-          Features
-        </h2>
-        <br></br>
-        <p className="mx-auto text-xl text-center leading-relaxed fs521 lg:w-2/3">
-          Best platform to compete with your buddy.
-        </p>
-        <div className="pt-12 pb-24 max-w-4xl mx-auto fsac4 md:px-1 px-3">
-          <div className="ktq4 shadow-xl border-2">
-            <h3 className="pt-3 font-semibold text-lg">
-                <span className="flex items-center gap-5">
-                <MdOutlineSecurity/>Security & Privacy
-                </span>
-            </h3>
-            <p className=" value-text text-md fkrr1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis temporibus voluptatibus magni cupiditate ducimus laudantium, non veniam delectus?
-            </p>
-          </div>
-          <div className="ktq4 shadow-xl border-2">
-            <h3 className="pt-3 font-semibold text-lg">
-                <span className="flex items-center gap-5"><FaHeart/> Respectful Feedback (maybe)</span>
-            </h3>
-            <p className="pt-2 value-text text-md fkrr1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos odit, quo nemo id repellat neque ratione ullam?
-            </p>
-          </div>
-          <div className="ktq4 shadow-xl border-2">
-            <h3 className="pt-3 font-semibold text-lg">
-                <span className="flex items-center gap-5"><FaShare/>Effortless Sharing</span>
-            </h3>
-            <p className="pt-2 value-text text-md  fkrr1">
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui in ad eum molestiae dolor ratione! Dolorum, doloribus.
-            </p>
-          </div>
-          <div className="ktq4 shadow-xl border-2">
-            <h3 className="pt-3 font-semibold text-lg">
-                <span className="flex items-center gap-5"><FaFaceSmileWink/> Simple & Insightful</span>
-            </h3>
-            <p className="pt-2 value-text text-md fkrr1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia tempora voluptates exercitationem, voluptatibus nihil itaque aut quis.
-            </p>
-          </div>
-        </div>
-    </section>
-    </div>
+    </main>
   );
-}   
+}
